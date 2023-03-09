@@ -721,15 +721,17 @@
         } else if (url.includes('indiegala.com')) {
             GM_addStyle(
                 '  #bh_markOwned {bottom: 70px !important;}'
-                + ' .bh_owned, .bh_owned .bundle-item-trading { background-color: rgba(125, 174, 45, 0.9) !important; } '
+                + ' .bh_owned, .bh_owned .bundle-item-trading { background-color: rgba(255, 0, 0, 0.5) !important; } '
+                + ' .bh_owned, .bh_owned .items-list-item-title { background-color: rgba(255, 0, 0, 0.5) !important; } '
+                + ' .bh_owned, .bh_owned .items-list-item-ticket-click { background-color: rgba(255, 0, 0, 0.5) !important; } '
                 + ' .ig-bundle { padding-left: 3px; padding-right: 3px; margin-bottom: 3px; } '
-                + ' .bh_owned.ig-bundle { background-color: rgba(125, 174, 45) !important; } '
-                + ' .bh_owned.ig-bundle .bundle-item-trading { background-color: rgba(125, 174, 45, 0) !important; } '
+                + ' .bh_owned.ig-bundle { background-color: rgba(255, 0, 0) !important; } '
+                + ' .bh_owned.ig-bundle .bundle-item-trading { background-color: rgba(255, 0, 0, 0) !important; } '
                 + ' .bh_owned .add-info-button-cont .left, .bh_owned .add-info-button-cont .palette-background-2 { '
                 + '   background-color: #7DAE2D !important; } '
                 + ' .bh_owned .add-info-button-cont .right .inner-info, .bh_owned .add-info-button-cont .right .palette-border-2 { '
                 + '   border-color: #7DAE2D !important; } '
-                + ' .bh_owned.medium-game .game-cover-medium { border: 3px solid #7DAE2D; background-color: rgba(125, 174, 45, 0.4); } '
+                + ' .bh_owned.medium-game .game-cover-medium { border: 3px solid #7DAE2D; background-color: rgba(255, 0, 0, 0.4); } '
                 + ' .bh_owned.game-data-cont { background-color: #76AD1C !important; } '
                 + ' .bundle-item-trading-cards-cont span { opacity: 0.7; } '
                 + ' .span-title .title_game, .span-title .title_drm, .span-title .title_music { '
@@ -779,7 +781,7 @@
                 countRetryTitle--
             }, 3000)
 
-            if (url.includes('indiegala.com/store/') || url.includes('indiegala.com/games') || url === 'https://www.indiegala.com/  || url.includes('indiegala.com/giveaways') ||') {
+            if (url.includes('indiegala.com/store/') || url.includes('indiegala.com/games') || url === 'https://www.indiegala.com/' || url.includes('indiegala.com/giveaways') {
                 let onClickFunction = function () {
                     let gameBrowserLinks = document.querySelectorAll('a.main-list-item-clicker')
                     for (let i = 0; i < gameBrowserLinks.length; i++) {
@@ -800,7 +802,7 @@
                             }
                         }
                     }
-                    
+
                     let giveawayLinks = document.querySelectorAll('.items-list-item .relative figure a img')
                     for (let i = 0; i < giveawayLinks.length; i++) {
                         let steamID = getSteamIDFromString(giveawayLinks[i].src)
