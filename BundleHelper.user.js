@@ -148,6 +148,7 @@
 
     function getSteamProfile() {
         if (isProfileCacheExpired()) {
+            console.log("cache expired")
             updateSteamProfileCache()
         }
         return GM_getValue(name_profile_json, 0)
@@ -321,7 +322,11 @@
             writeConsoleMessage('App: Owned - https://store.steampowered.com/app/' + steamID + '/')
             return true
         }
-        // writeConsoleMessage('App: Unowned - https://store.steampowered.com/app/' + steamID + '/')
+        if(typeof steam_profile !== 'undefined' && steam_profile !== null){
+            // writeConsoleMessage('App: Unowned - https://store.steampowered.com/app/' + steamID + '/')
+            return false
+        }
+        writeConsoleMessage("Steam profile undefined in isAppOwned")
         return false
     }
 
@@ -527,12 +532,12 @@
             + ' .bh_button, .bh_button a { '
             + '   font-family: Verdana; font-size: 12px; '
             + '   line-height: 16px; } '
-            + ' .bh_owned { background-color: #7CA156 !important; '
+            + ' .bh_owned { background-color: #FF0000 !important; '
             + '   transition: background 500ms ease 0s; } '
             + ' #bh_markOwned { '
             + '   position: fixed; right: 20px; bottom: 20px; z-index: 33; } '
             + ' #bh_cacheReset { '
-            + '   position: fixed; right: 20px; bottom: 60px; z-index: 33; } '
+            + '   position: fixed; right: 20px; bottom: 125px; z-index: 33; } '
             + ' #bh_OpenLib { '
             + '   position: fixed; right: 20px; bottom: 65px; z-index: 33; } '
         )
