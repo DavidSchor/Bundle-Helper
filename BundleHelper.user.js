@@ -517,7 +517,7 @@
         divButton.appendChild(eleA)
 
         // Create button to refresh profile details
-        // createCacheResetButton()
+        createCacheResetButton()
 
         GM_addStyle(
             '   .bh_button { '
