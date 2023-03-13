@@ -827,7 +827,6 @@
                         let text = giveawayLevelsFields[i].innerText
                         if(text.includes('Lev')) {
                            let level = parseInt(text.replace('Lev. ',''))
-                           console.log(level)
                            if(level > indieGalaProfileLevel) {
                                let markedItem = giveawayLevelsFields[i].parentElement.parentElement.parentElement
                                setElementOwned(markedItem)
