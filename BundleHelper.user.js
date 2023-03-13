@@ -69,6 +69,7 @@
 
     let write_console_messages = true
 
+    let indieGalaProfileLevel = 2
     let name_profile_json = 'bh_profile_json'
     let name_profile_time = 'bh_profile_time'
     let owned_item_class = 'bh_owned'
@@ -148,7 +149,6 @@
 
     function getSteamProfile() {
         if (isProfileCacheExpired()) {
-            console.log("cache expired")
             updateSteamProfileCache()
         }
         return GM_getValue(name_profile_json, 0)
@@ -319,7 +319,7 @@
      */
     function isAppOwned(steamID) {
         if (steam_profile.rgOwnedApps.includes(parseInt(steamID))) {
-            writeConsoleMessage('App: Owned - https://store.steampowered.com/app/' + steamID + '/')
+            //writeConsoleMessage('App: Owned - https://store.steampowered.com/app/' + steamID + '/')
             return true
         }
         if(typeof steam_profile !== 'undefined' && steam_profile !== null){
@@ -532,7 +532,7 @@
             + ' .bh_button, .bh_button a { '
             + '   font-family: Verdana; font-size: 12px; '
             + '   line-height: 16px; } '
-            + ' .bh_owned { background-color: #FF0000 !important; '
+            + ' .bh_owned { background-color: #7CA156 !important; '
             + '   transition: background 500ms ease 0s; } '
             + ' #bh_markOwned { '
             + '   position: fixed; right: 20px; bottom: 20px; z-index: 33; } '
@@ -808,6 +808,7 @@
                         }
                     }
 
+
                     let giveawayLinks = document.querySelectorAll('.items-list-item .relative figure a img')
                     for (let i = 0; i < giveawayLinks.length; i++) {
                         let steamID = getSteamIDFromString(giveawayLinks[i].src)
@@ -815,9 +816,28 @@
                             if (isAppOwned(steamID)) {
                                 let markedItem = giveawayLinks[i].parentElement.parentElement.parentElement
                                 setElementOwned(markedItem)
+
                             }
                         }
                     }
+
+
+                    let giveawayLevelsFields = document.querySelectorAll(".items-list-item-type span")
+                    for (let i = 0; i < giveawayLevelsFields.length; i++) {
+                        let text = giveawayLevelsFields[i].innerText
+                        if(text.includes('Lev')) {
+                           let level = parseInt(text.replace('Lev. ',''))
+                           console.log(level)
+                           if(level > indieGalaProfileLevel) {
+                               let markedItem = giveawayLevelsFields[i].parentElement.parentElement.parentElement
+                               setElementOwned(markedItem)
+                           }
+                        }
+
+                    }
+
+
+                    
                 }
                 addMarkBtnHandler(onClickFunction)
             }
