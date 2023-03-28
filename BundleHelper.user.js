@@ -807,6 +807,11 @@
                         }
                     }
 
+                    let cantAffordGiveawayLinks = document.querySelectorAll('.items-list-item-data-not-purchasable')
+                    for (let i = 0; i < cantAffordGiveawayLinks.length; i++) {
+                        let markedItem = cantAffordGiveawayLinks[i].parentElement.parentElement.parentElement.parentElement.parentElement
+                                setElementOwned(markedItem)
+                    }
 
                     let giveawayLinks = document.querySelectorAll('.items-list-item .relative figure a img')
                     for (let i = 0; i < giveawayLinks.length; i++) {
@@ -814,7 +819,6 @@
                         if (steamID !== null) {
                             if (isAppOwned(steamID)) {
                                 let markedItem = giveawayLinks[i].parentElement.parentElement.parentElement.parentElement.parentElement
-                                setElementOwned(markedItem)
                                 markedItem.remove()
 
                             }
@@ -830,7 +834,6 @@
                            let level = parseInt(text.replace('Lev. ',''))
                            if(level > indieGalaProfileLevel) {
                                let markedItem = giveawayLevelsFields[i].parentElement.parentElement.parentElement.parentElement.parentElement
-                               setElementOwned(markedItem)
                                markedItem.remove()
                            }
                         }
