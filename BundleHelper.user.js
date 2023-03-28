@@ -69,7 +69,6 @@
 
     let write_console_messages = true
 
-    let indieGalaProfileLevel = 2
     let name_profile_json = 'bh_profile_json'
     let name_profile_time = 'bh_profile_time'
     let owned_item_class = 'bh_owned'
@@ -814,29 +813,28 @@
                         let steamID = getSteamIDFromString(giveawayLinks[i].src)
                         if (steamID !== null) {
                             if (isAppOwned(steamID)) {
-                                let markedItem = giveawayLinks[i].parentElement.parentElement.parentElement
+                                let markedItem = giveawayLinks[i].parentElement.parentElement.parentElement.parentElement.parentElement
                                 setElementOwned(markedItem)
+                                markedItem.remove()
 
                             }
                         }
                     }
 
 
+                     let indieGalaProfileLevel = document.querySelector("#userGiveawaysLevel").innerText
                     let giveawayLevelsFields = document.querySelectorAll(".items-list-item-type span")
                     for (let i = 0; i < giveawayLevelsFields.length; i++) {
                         let text = giveawayLevelsFields[i].innerText
                         if(text.includes('Lev')) {
                            let level = parseInt(text.replace('Lev. ',''))
                            if(level > indieGalaProfileLevel) {
-                               let markedItem = giveawayLevelsFields[i].parentElement.parentElement.parentElement
+                               let markedItem = giveawayLevelsFields[i].parentElement.parentElement.parentElement.parentElement.parentElement
                                setElementOwned(markedItem)
+                               markedItem.remove()
                            }
                         }
-
                     }
-
-
-                    
                 }
                 addMarkBtnHandler(onClickFunction)
             }
