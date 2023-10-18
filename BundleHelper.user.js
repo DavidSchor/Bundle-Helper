@@ -787,6 +787,7 @@
 
             if (url.includes('indiegala.com/store/') || url.includes('indiegala.com/games') || url === 'https://www.indiegala.com/' || url.includes('indiegala.com/giveaways')) {
                 let onClickFunction = function () {
+
                     let gameBrowserLinks = document.querySelectorAll('a.main-list-item-clicker')
                     for (let i = 0; i < gameBrowserLinks.length; i++) {
                         let steamID = getSteamIDFromString(gameBrowserLinks[i].href)
@@ -813,12 +814,35 @@
                                 setElementOwned(markedItem)
                     }
 
+                    let dontWantTitleList = ["Trivia Vault", "Professor Watts", "3D PUZZLE -"]
+                    let elementTitles = document.querySelectorAll('.items-list-item-title')
+                    for (let i = 0; i < elementTitles.length; i++) {
+                        for (let j = 0; j < dontWantTitleList.length; j++) {
+                            if (elementTitles[i].innerText.includes(dontWantTitleList[j])) {
+                                let markedItem = elementTitles[i].closest('.items-list-col')
+                                markedItem.remove()
+                            }
+                        }
+                    }
+
+
+                    let gallaLinks = document.querySelectorAll('.items-list-item-type-indiegala')
+                    for (let i = 0; i < gallaLinks.length; i++) {
+                        let innergallatext = gallaLinks[i].innerText
+                        let extraOdds = innergallatext.includes("extra odds") ||innergallatext.includes("EXTRA ODDS")
+                        if (extraOdds) {
+                            let markedItem = gallaLinks[i].closest('.items-list-col')
+                            markedItem.remove()
+                         }
+                    }
+
+
                     let giveawayLinks = document.querySelectorAll('.items-list-item .relative figure a img')
                     for (let i = 0; i < giveawayLinks.length; i++) {
                         let steamID = getSteamIDFromString(giveawayLinks[i].src)
                         if (steamID !== null) {
                             if (isAppOwned(steamID)) {
-                                let markedItem = giveawayLinks[i].parentElement.parentElement.parentElement.parentElement.parentElement
+                                let markedItem = giveawayLinks[i].closest('.items-list-col')
                                 markedItem.remove()
 
                             }
@@ -833,7 +857,7 @@
                         if(text.includes('Lev')) {
                            let level = parseInt(text.replace('Lev. ',''))
                            if(level > indieGalaProfileLevel) {
-                               let markedItem = giveawayLevelsFields[i].parentElement.parentElement.parentElement.parentElement.parentElement
+                               let markedItem = giveawayLevelsFields[i].closest('.items-list-col')
                                markedItem.remove()
                            }
                         }
